@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Empresas(models.Model):
+class Empresa(models.Model):
     nome = models.CharField('Nome', max_length=100, help_text='Nome da empresa')
 
     class Meta:
