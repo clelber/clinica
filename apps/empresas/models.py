@@ -1,8 +1,9 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Empresa(models.Model):
-    nome = models.CharField('Nome', max_length=100, help_text='Nome da empresa')
+    nome = models.CharField('Nome', max_length=100)
 
     class Meta:
         verbose_name = 'Empresa'
@@ -10,5 +11,9 @@ class Empresa(models.Model):
 
     def __str__(self):
         return self.nome
+
+    def get_absolute_url(self):
+        return reverse('home')
+
 
 
