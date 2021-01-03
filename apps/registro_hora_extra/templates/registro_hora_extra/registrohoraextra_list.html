@@ -4,11 +4,16 @@
         Lista de RegistroHoraExtra
         <br>
         {% for RegistroHoraExtra in object_list %}
+                 <a href="{% url 'update_hora_extra' RegistroHoraExtra.id %}">
+                      {{ RegistroHoraExtra }}
+                 </a>
 
-                {{ RegistroHoraExtra }}
-
+                <a href="{% url 'delete_hora_extra' RegistroHoraExtra.id %}">
+                      Deletar
+                 </a>
 
         <br>
         {% endfor %}
+        <a href="{% url 'create_hora_extra' %}" class="btn-btn-info">Novo</a>
 
 {% endblock %}

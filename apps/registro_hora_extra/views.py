@@ -1,21 +1,18 @@
-from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView
+
+from .forms import RegistroHoraExtraForm
 from .models import RegistroHoraExtra
 
-"""
+
 class HoraextraCreateView(CreateView):
     model = RegistroHoraExtra
-    fields = ['motivo', 'horas']
+    form_class = RegistroHoraExtraForm
 
-    def form_valid(self, form):
-        registro_horaextra = form.save(commit=False)
-        registro_horaextra.funcinario = self.request.user.funcionario.id
-
-        registro_horaextra.save()
-        return super(HoraextraCreateView, self).form_valid(form)
-
-"""
+    def get_form_kwargs(self):
+        kwargs = super(HoraextraCreateView, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
 
 
 class HoraextraListView(ListView):
@@ -26,17 +23,16 @@ class HoraextraListView(ListView):
         return RegistroHoraExtra.objects.filter(funcionario__empresa=empresa_logada)
 
 
-"""
 class HoraextraUpdateView(UpdateView):
     model = RegistroHoraExtra
-    fields = ['motivo', 'horas']
+    fields = ['motivo', 'funcionario', 'horas']
 
 
 class HoraextraDeleteView(DeleteView):
     model = RegistroHoraExtra
     success_url = reverse_lazy('list_hora_extra')
 
-"""
+
 
 
 
